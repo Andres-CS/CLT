@@ -34,6 +34,9 @@ declare -a dirFiles=()
 declare -a regFiles=()
 declare -a urlLine=()
 
+S_TEXT="SERVER ADDRESS"
+PADDING=0
+
 for f in ${allFiles[@]}
 do 
     #Adding dir names to the dirFiles array
@@ -47,6 +50,12 @@ do
         then
             #Concatenate user uPath provided with files f in the path to get full path of file.
             regFiles[${#regFiles[@]}]=$uPath$f
+
+            #Get length Largest path stored.
+            if [ "${#regFiles[-1]}" -gt "$PADDING" ]
+            then
+                PADDING=${#regFiles[-1]}
+            fi
         fi
     fi
 done 
@@ -63,13 +72,15 @@ do
     fi
 done
 
+
+
 for ((i=0; i<${#regFiles[@]};i++))
 do
     if [ "${urlLine[$i]}" == "" ]
     then
-        printf "%s | %s | %s" "${regFiles[$i]}" "__" "None"
+        printf '\e[1;35m %s \e[m| \e[1;34m %s \e[m| \e[0;32m %s \e[m' "${regFiles[$i]}" "__" "None"
     else
-        printf "%s | %d | %s" "${regFiles[$i]}" ${urlLine[$i]} "$(sed -n "${urlLine[$i]} p" ${regFiles[$i]})"
+        printf '\e[1;35m %s \e[m| \e[1;34m %d \e[m| \e[0;32m %s \e[m | \e[0;31m %s \e[m' "${regFiles[$i]}" ${urlLine[$i]} "$(sed -n "${urlLine[$i]} p" ${regFiles[$i]})" "$S_TEXT"
     fi
     echo
 done
