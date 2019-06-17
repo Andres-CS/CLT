@@ -54,7 +54,7 @@ done
 #Find line num that contains the RegEx pattern looked for and store it. 
 for j in ${regFiles[@]}
 do
-    linum=`grep -n https[:/.~/\a-zA-Z0-9]* $j | cut -d: -f 1`
+    linum=`grep -n :.*php $j | cut -d: -f 1`
     if [ ! linum == "" ]
     then
         urlLine[${#urlLine[@]}]=$linum
