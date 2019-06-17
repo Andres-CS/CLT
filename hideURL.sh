@@ -45,7 +45,8 @@ do
         #Check files match Extension
         if [ ${f: -${#uExt}} == "$uExt" ]
         then
-            regFiles[${#regFiles[@]}]=$f
+            #Concatenate user uPath provided with files f in the path to get full path of file.
+            regFiles[${#regFiles[@]}]=$uPath$f
         fi
     fi
 done 
@@ -61,8 +62,6 @@ do
         #urlLine[${#urlLine[@]}]=0
     fi
 done
-
-
 
 for ((i=0; i<${#regFiles[@]};i++))
 do
