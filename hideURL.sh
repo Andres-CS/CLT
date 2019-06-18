@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while getopts ":p:e:" arg
+while getopts ":p:e:m:" arg
 do
     case $arg in
         p)
@@ -20,67 +20,69 @@ do
                 echo $uExt
             fi
             ;;
+        m) 
+            S_TEXT=${OPTARG}
+            if [ "$S_TEXT" == "" ]
+            then
+                S_TEXT="SERVER ADDRESS"
+            fi
+            #echo $S_TEXT
+            ;;
         :)
             echo "PLEASE PROVIE A path AND A FILE extension."
             ;;
     esac
 done
 
+#RegEx URL Patter
+HTTPulr="(https|HTTPS).*[a-zA-Z]"
+sed_HTTPurl="\(https\|HTTPS\).*[a-zA-Z]"
+
 #Files In Directory
 FID=`ls $uPath`
 
-declare -a allFiles=($FID)
-declare -a dirFiles=()
+declare -a allFiles=($FID) 
 declare -a regFiles=()
 declare -a urlLine=()
 
-S_TEXT="SERVER ADDRESS"
-PADDING=0
-
-for f in ${allFiles[@]}
+for file in ${allFiles[@]}
 do 
-    #Adding dir names to the dirFiles array
-    if [ -d $f ]
+    #Adding files names to the regFiles array
+    if [ ! -d $file ]
     then
-        dirFiles[${#dirFiles[@]}]=$f
-    #Adding files name to the regFiles array
-    else
         #Check files match Extension
-        if [ ${f: -${#uExt}} == "$uExt" ]
+        if [ ${file: -${#uExt}} == "$uExt" ]
         then
             #Concatenate user uPath provided with files f in the path to get full path of file.
-            regFiles[${#regFiles[@]}]=$uPath$f
-
-            #Get length Largest path stored.
-            if [ "${#regFiles[-1]}" -gt "$PADDING" ]
-            then
-                PADDING=${#regFiles[-1]}
-            fi
+            regFiles[${#regFiles[@]}]=$uPath$file
         fi
     fi
 done 
 
 #Find line num that contains the RegEx pattern looked for and store it. 
-for j in ${regFiles[@]}
+for f in ${regFiles[@]}
 do
-    linum=`grep -n :.*php $j | cut -d: -f 1`
+    linum=`grep -n -E $HTTPulr $f | cut -d: -f 1`
     if [ ! linum == "" ]
     then
         urlLine[${#urlLine[@]}]=$linum
-    #else
-        #urlLine[${#urlLine[@]}]=0
     fi
 done
-
-
 
 for ((i=0; i<${#regFiles[@]};i++))
 do
     if [ "${urlLine[$i]}" == "" ]
     then
-        printf '\e[1;35m %s \e[m| \e[1;34m %s \e[m| \e[0;32m %s \e[m' "${regFiles[$i]}" "__" "None"
+        printf '\e[33;1m%s | %s | %s \e[m' "${regFiles[$i]}" "__" "None"
     else
-        printf '\e[1;35m %s \e[m| \e[1;34m %d \e[m| \e[0;32m %s \e[m | \e[0;31m %s \e[m' "${regFiles[$i]}" ${urlLine[$i]} "$(sed -n "${urlLine[$i]} p" ${regFiles[$i]})" "$S_TEXT"
+        sed=$(sed -n "${urlLine[$i]}s/$sed_HTTPurl/ $S_TEXT /g" ${regFiles[$i]})
+        if [ ! "$sed" == "0" ]
+        then
+            sed=$(sed -n "${urlLine[$i]}p" ${regFiles[$i]})
+            rsed=$(sed -i "${urlLine[$i]}s/$sed_HTTPurl/ $S_TEXT /" ${regFiles[$i]})
+            sed=$(sed -n "${urlLine[$i]}p" ${regFiles[$i]})
+            printf '\e[1;35m%s\e[m | \e[1;34m%d\e[m | \e[0;32m%s\e[m | \e[0;34m%s\e[m' "${regFiles[$i]}" ${urlLine[$i]} "$sed" "$sed"
+        fi
     fi
-    echo
+    echo 
 done
