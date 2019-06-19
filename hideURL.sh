@@ -78,10 +78,10 @@ do
         sed=$(sed -n "${urlLine[$i]}s/$sed_HTTPurl/ $S_TEXT /g" ${regFiles[$i]})
         if [ ! "$sed" == "0" ]
         then
-            sed=$(sed -n "${urlLine[$i]}p" ${regFiles[$i]})
+            bsed=$(sed -n "${urlLine[$i]}p" ${regFiles[$i]})
             rsed=$(sed -i "${urlLine[$i]}s/$sed_HTTPurl/ $S_TEXT /" ${regFiles[$i]})
-            sed=$(sed -n "${urlLine[$i]}p" ${regFiles[$i]})
-            printf '\e[1;35m%s\e[m | \e[1;34m%d\e[m | \e[0;32m%s\e[m | \e[0;34m%s\e[m' "${regFiles[$i]}" ${urlLine[$i]} "$sed" "$sed"
+            ased=$(sed -n "${urlLine[$i]}p" ${regFiles[$i]})
+            printf '\e[1;35m%s\e[m | \e[1;34m%d\e[m | \e[0;32m%s\e[m | \e[0;34m%s\e[m' "${regFiles[$i]}" ${urlLine[$i]} "$bsed" "$ased"
         fi
     fi
     echo 
