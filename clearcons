@@ -13,7 +13,7 @@ then
     else
         #REMOVE ONLY THE ONES STOP/EXITED
         echo "REMOVING ALL STOP/EXITED CONTAINERS"
-        docker rm $(docker ps -a -q --no-trunc)  
+        docker rm $(docker ps -a -q --no-trunc -f status=running)  
     fi
 
 else
@@ -27,6 +27,6 @@ else
     else
         #REMOVE ONLY THE ONES STOP/EXITED
         echo "REMOVING ALL STOP/EXITED CONTAINERS"
-        sudo docker rm $(docker ps -a -q --no-trunc)  
+        sudo docker rm $(docker ps -a -q --no-trunc -f status=running)  
     fi
 fi
