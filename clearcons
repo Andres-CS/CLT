@@ -3,7 +3,7 @@
 #check user belongs to Docker group
 if [ $(groups | grep -o docker) = "docker" ]
 then
-    if [ $1 == "-a" ]
+    if [ $1 = "-a" ]
     then
         #REMOVE ALL CONTAINERS - ALL OF THEM
         echo "STOPING ALL RUNNING CONTAINERS"
