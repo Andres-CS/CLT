@@ -17,6 +17,10 @@ function startVM (){
 	sudo virsh start $1
 }
 
+function vmInfo (){
+	ipaddr=$(sudo virsh domifaddr $1 | grep  -E -o "([0-9]{1,3}\.){3}[0-9]{1,3}\/?[0-9]{1,3}"
+
+
 
 #START SCRIPT
 
@@ -42,6 +46,7 @@ printf "Select a VM: "
 read VM
 startVM $VM
 
+#Give Info on the started VM
 
 
 echo -e "${cYELLOW}----------------------${cGREEN}DONE${cYELLOW}-------------------------${cNONE}"
