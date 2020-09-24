@@ -20,7 +20,7 @@ function startVM (){
 function vmInfo (){
 	ipaddr=$(sudo virsh domifaddr $1 | grep  -E -o "([0-9]{1,3}\.){3}[0-9]{1,3}\/?[0-9]{1,3}")
 
-	echo "IPv4 addres of $1: $ipaddr"
+	echo -e "IPv4 addres of $1: ${cGREEN}$ipaddr${cNONE}"
 }
 
 
@@ -51,6 +51,7 @@ startVM $VM
 
 #Give Info on the started VM
 vmInfo $VM
+echo
 
 
 echo -e "${cYELLOW}----------------------${cGREEN}DONE${cYELLOW}-------------------------${cNONE}"
