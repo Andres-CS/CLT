@@ -35,5 +35,13 @@ then
 	echo -e "${cBLUE}Network default is active${cNONE}"
 fi
 
+
+#Check Virtual Machines
+echo "Virtual Machines"
+sudo virsh list --all
+printf "Select a VM: "
+read VM
+startVM $VM
+
 echo -e "${cYELLOW}----------------------${cGREEN}DONE${cYELLOW}-------------------------${cNONE}"
 #END SCRIPT
