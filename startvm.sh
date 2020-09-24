@@ -8,6 +8,17 @@ cYELLOW='\033[1;33m'
 cNONE='\033[0m'
 
 
+#Functions
+function startNet (){
+	sudo virsh net-start $1
+}
+
+function startVM (){
+	sudo virsh start $1
+}
+
+
+
 #START SCRIPT
 
 echo -e "${cYELLOW}--------------------${cGREEN}START${cYELLOW}-------------------------${cNONE}"
