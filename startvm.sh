@@ -18,7 +18,6 @@ function startVM (){
 }
 
 
-
 #START SCRIPT
 
 echo -e "${cYELLOW}--------------------${cGREEN}START${cYELLOW}-------------------------${cNONE}"
