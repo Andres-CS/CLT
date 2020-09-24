@@ -18,7 +18,10 @@ function startVM (){
 }
 
 function vmInfo (){
-	ipaddr=$(sudo virsh domifaddr $1 | grep  -E -o "([0-9]{1,3}\.){3}[0-9]{1,3}\/?[0-9]{1,3}"
+	ipaddr=$(sudo virsh domifaddr $1 | grep  -E -o "([0-9]{1,3}\.){3}[0-9]{1,3}\/?[0-9]{1,3}")
+
+	echo "IPv4 addres of $1: $ipaddr"
+}
 
 
 
@@ -31,7 +34,7 @@ echo -e "\t\t${cRED}KVM - Libvrt${cNONE}"
 echo "Checking Network"
 if [[ $(sudo virsh net-list --all | grep -o inactive) == inactive ]]
 then
-	echo -e "Activating Network: ${cBLUE}default${cNONE}"
+	echo -e "Activating Network: ${cGREEN}default${cNONE}"
 	startNet "default"
 elif [[ $(sudo virsh net-list --all | grep -o active) == active ]]
 then
@@ -47,6 +50,7 @@ read VM
 startVM $VM
 
 #Give Info on the started VM
+vmInfo $VM
 
 
 echo -e "${cYELLOW}----------------------${cGREEN}DONE${cYELLOW}-------------------------${cNONE}"
