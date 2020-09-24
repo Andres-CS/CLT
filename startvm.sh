@@ -13,7 +13,16 @@ cNONE='\033[0m'
 echo -e "${cYELLOW}--------------------${cGREEN}START${cYELLOW}-------------------------${cNONE}"
 echo -e "\t\t${cRED}KVM - Libvrt${cNONE}"
 
-
+#Check Networks
+echo "Checking Network"
+if [[ $(sudo virsh net-list --all | grep -o inactive) == inactive ]]
+then
+	echo -e "Activating Network: ${cBLUE}default${cNON}"
+	startNet "default"
+elif [[ $(sudo virsh net-list --all | grep -o active) == active ]]
+then
+	echo -e "${cBLUE}Network default is active${cNONE}"
+fi
 
 echo -e "${cYELLOW}----------------------${cGREEN}DONE${cYELLOW}-------------------------${cNONE}"
 #END SCRIPT
