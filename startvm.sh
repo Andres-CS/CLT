@@ -27,7 +27,7 @@ echo -e "\t\t${cRED}KVM - Libvrt${cNONE}"
 echo "Checking Network"
 if [[ $(sudo virsh net-list --all | grep -o inactive) == inactive ]]
 then
-	echo -e "Activating Network: ${cBLUE}default${cNON}"
+	echo -e "Activating Network: ${cBLUE}default${cNONE}"
 	startNet "default"
 elif [[ $(sudo virsh net-list --all | grep -o active) == active ]]
 then
@@ -41,6 +41,8 @@ sudo virsh list --all
 printf "Select a VM: "
 read VM
 startVM $VM
+
+
 
 echo -e "${cYELLOW}----------------------${cGREEN}DONE${cYELLOW}-------------------------${cNONE}"
 #END SCRIPT
