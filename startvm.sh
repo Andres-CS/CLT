@@ -21,7 +21,7 @@ function vmInfo (){
 	while :
 	do
 		ipaddr=$(sudo virsh domifaddr $1 | grep  -E -o "([0-9]{1,3}\.){3}[0-9]{1,3}\/?[0-9]{1,3}")
-		#Testi if there is an IP assigned yet
+		#Test if there is an IP assigned yet
 		if [ -z "$ipaddr" ]
 		then
 			continue
