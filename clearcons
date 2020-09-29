@@ -1,32 +1,37 @@
 #!/bin/bash
 
+function stopCons() {
+    echo "STOPING ALL RUNNING CONTAINERS"
+    docker stop $(docker ps -a -q --no-trunc -f status=running)
+}
+
+function rmCons (){
+    echo "REMOVING ALL STOP/EXITED CONTAINERS"
+    docker rm $(docker ps -a -q --no-trunc)
+}
+
 #check user belongs to Docker group
 if [ $(groups | grep -o docker) = "docker" ]
 then
     if [ $1 = "-a" ]
     then
         #REMOVE ALL CONTAINERS - ALL OF THEM
-        echo "STOPING ALL RUNNING CONTAINERS"
-        docker stop $(docker ps -a -q --no-trunc -f status=running)
-        echo "REMOVING ALL STOP/EXITED CONTAINERS"
-        docker rm $(docker ps -a -q --no-trunc)
+        stopCons
+        rmCons
+       
     else
         #REMOVE ONLY THE ONES STOP/EXITED
-        echo "REMOVING ALL STOP/EXITED CONTAINERS"
-        docker rm $(docker ps -a -q --no-trunc -f status=running)  
+        stopCons  
     fi
 
 else
     if [ $1 == "-a" ]
     then
         #REMOVE ALL CONTAINERS - ALL OF THEM
-        echo "STOPING ALL RUNNING CONTAINERS"
-        sudo docker stop $(docker ps -a -q --no-trunc -f status=running)
-        echo "REMOVING ALL STOP/EXITED CONTAINERS"
-        sudo docker rm $(docker ps -a -q --no-trunc)
+        stopCons
+        rmCons
     else
         #REMOVE ONLY THE ONES STOP/EXITED
-        echo "REMOVING ALL STOP/EXITED CONTAINERS"
-        sudo docker rm $(docker ps -a -q --no-trunc -f status=running)  
+        stopCons
     fi
 fi
