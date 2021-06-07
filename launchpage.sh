@@ -14,4 +14,4 @@ then
 fi
 
 echo -e "${BLUE}LAUNCHING CONTAINER:${NC} japcpage"
-    $(docker run --name japcpage -it -p 80:80 japc /bin/bash) #source /home/app/japc_venv/bin/activate)
+    $(docker run --name japcpage -it --mount type=bind,source=/home/delphinus/Devlp/Japc/src/,destination=/home/app/ -p 80:80 japc /bin/bash)
