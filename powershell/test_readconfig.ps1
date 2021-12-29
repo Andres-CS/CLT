@@ -28,43 +28,40 @@ catch {
 
 # --- ETL ---- 
 
-#Extraction 
+#--Extraction--
+#Read Data from config file
 
 $rawData = Get-Content $target_path
 
-#Transformation 
+#--Transformation--
+#Create Hash Tables to store in-memory data from read file. 
+
 $connections = @{}
 $tmphastable = @{}
-$count = 1
+$counter = 0
+$dictEntries = 1
 
-#-------------- START FIXING/REFACTORING --------------
-
+#--Load--
 #Read each line
 #Remove empty spaces at start & split lines at space
 #If empty line populate connections and clear tmphashtable
 #loop through file lines
 foreach ($line in $rawData){
-    $line = ($line.trimstart(" ")).split( " ")
-    #If empty line
-    if (-not $line){
-        $connections.Add($count, @{})
+    $line = ($line.trimstart(" ")).split(" ")
+    $counter += 1
+    #If empty line or end of read lines
+    if ((-not $line) -or ($counter -eq $rawData.Count)){
+        $connections.Add($dictEntries, @{})
         foreach($k in $tmphastable.Keys){
-            $connections[$count].Add($k, $tmphastable[$k])
+            $connections[$dictEntries].Add($k, $tmphastable[$k])
         }
-        $count = $count + 1 
+        $dictEntries += 1 
         $tmphastable.Clear()
     }
     else{
         $tmphastable.Add($line[0], $line[1])
     }
 }
-
-$connections.Add($count, @{})
-foreach($k in $tmphastable.Keys){
-    $connections[$count].Add($k, $tmphastable[$k])
-}
-
-#-------------- END FIXING/REFACTORING --------------
 
 #Welcome Message
 Write-Host -ForegroundColor Green 'Welcome to RunSSH V2'
