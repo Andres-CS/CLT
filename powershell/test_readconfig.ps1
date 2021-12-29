@@ -67,8 +67,8 @@ foreach($k in $tmphastable.Keys){
 #-------------- END FIXING/REFACTORING --------------
 
 #Welcome Message
-Write-Host 'Welcome to RunSSH V2'
-Write-Host 'Servers availables:'
+Write-Host -ForegroundColor Green 'Welcome to RunSSH V2'
+Write-Host -ForegroundColor Green 'Servers availables:'
 Write-Host
 
 
@@ -81,16 +81,25 @@ foreach($i in $connections.Keys){
 #User Input
 Write-Host " "
 $ui = Read-Host "Connect to"
+$ui = $ui -as [int] #Casting $ui to INT32 
 Write-Host " "
-Write-Host $ui
-
 
 #Runner Container
-foreach ($ssh in $connections.Keys){
-    if ($ui -eq $ssh){
-        Write-Host "You are connecting to: " $connections[$ssh]["Host"]
-        $ipath = $connections[$ssh]["IdentityFile"]
-        RESULTS=$(docker run --rm -it --mount type=bind,source=$ipath,destination=/home/ssh/ sshtool ssh -i /home/ssh -p $connections[$ssh]["Port"] $connections[$ssh]["Hostname"])
-        
+try {
+    foreach ($ssh in $connections.Keys){
+        if ($ui -eq $ssh){
+            Write-Host -ForegroundColor Green "You are connecting to: " $connections[$ui]["Host"]
+            $ipath = $connections[$ui]["IdentityFile"]
+            docker run --rm -it --mount type=bind,source=$ipath,destination=/home/ssh/ sshtool ssh -i /home/ssh -p $connections[$ui]["Port"] $connections[$ui]["Hostname"] -l $connections[$ui]["User"]
+        }
     }
 }
+catch [System.Exception]{ 
+    Write-Host -ForegroundColor Yellow $_ 
+}
+finally{  
+    Write-Host -foregroundColor Cyan "Thank you $active_User, you have logged out of your SSH session from " -NoNewline
+    Write-Host -foregroundColor Magenta $connections[$ui]["Host"] 
+}
+
+
