@@ -1,8 +1,8 @@
 # Scripts
 ## _Set of scripts to aid in your everyday DevOps world_
 
- [![iamge](https://github.com/Andres-CS/scripts/blob/master/Images/bash.png)](https://www.gnu.org/software/bash/)
- [![iamge](https://github.com/Andres-CS/scripts/blob/master/Images/powershell.png)](https://docs.microsoft.com/en-us/powershell/) 
+ [![BashIamge](https://github.com/Andres-CS/scripts/blob/master/Images/bash.png)](https://www.gnu.org/software/bash/)
+ [![PowershellIamge](https://github.com/Andres-CS/scripts/blob/master/Images/powershell.png)](https://docs.microsoft.com/en-us/powershell/) 
 
 Set of scripts that help me ease my DevOps work everyday.
 Hope it helps you too! 
