@@ -9,7 +9,7 @@ Hope it helps you too!
 
 :-1: - In the works
 
-:heavy_check_markc: - Working properly
+:heavy_check_mark: - Working properly
 
 ## Bash 
 The following are the scripts in the **MASTER**  branch working ready for use :
