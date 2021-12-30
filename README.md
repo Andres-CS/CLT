@@ -7,7 +7,7 @@
 Set of scripts that help me ease my DevOps work everyday.
 Hope it helps you too! 
 
-## Bash  [![iamge](https://github.com/Andres-CS/scripts/blob/master/Images/bash.png)](https://www.gnu.org/software/bash/)
+## Bash  [![BashIamge](https://github.com/Andres-CS/scripts/blob/master/Images/bash.png)](https://www.gnu.org/software/bash/)
 The following are the scripts in the **MASTER**  branch working ready for use :
 
 - Clearcons - Stops and removes unused Docker containers.
@@ -15,7 +15,7 @@ The following are the scripts in the **MASTER**  branch working ready for use :
 - startvm.sh - Lists VMs available, and user selects which machine to start.
 - Tmux - Folder that connects scripts related to tmux emulator.
 
-## Powershell  [![iamge](https://github.com/Andres-CS/scripts/blob/master/Images/powershell.png)](https://docs.microsoft.com/en-us/powershell/) 
+## Powershell  [![PowershellIamge](https://github.com/Andres-CS/scripts/blob/master/Images/powershell.png)](https://docs.microsoft.com/en-us/powershell/) 
 The following a the scripts in the **MASTER**  branch working ready for use :
 
 - runssh.ps1 - Displays which SSH Hosts are available and ready to connect. 
