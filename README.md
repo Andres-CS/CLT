@@ -8,6 +8,7 @@ Set of scripts that help me ease my DevOps work everyday.
 Hope it helps you too! 
 
 :-1: - In the works
+
 :heavy_check_markc: - Working properly
 
 ## Bash 
