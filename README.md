@@ -7,18 +7,21 @@
 Set of scripts that help me ease my DevOps work everyday.
 Hope it helps you too! 
 
-## Bash  [![BashIamge](https://github.com/Andres-CS/scripts/blob/master/Images/bash.png)](https://www.gnu.org/software/bash/)
+:-1: - In the works
+:heavy_check_markc: - Working properly
+
+## Bash 
 The following are the scripts in the **MASTER**  branch working ready for use :
 
-- Clearcons - Stops and removes unused Docker containers.
-- instkvm.sh - Installs KVM in your linux machine.
-- startvm.sh - Lists VMs available, and user selects which machine to start.
-- Tmux - Folder that connects scripts related to tmux emulator.
+- Clearcons - Stops and removes unused Docker containers. :heavy_check_mark:
+- instkvm.sh - Installs KVM in your linux machine. :-1:
+- startvm.sh - Lists VMs available, and user selects which machine to start. :-1:
+- Tmux - Folder that connects scripts related to tmux emulator. :-1:
 
-## Powershell  [![PowershellIamge](https://github.com/Andres-CS/scripts/blob/master/Images/powershell.png)](https://docs.microsoft.com/en-us/powershell/) 
+## Powershell 
 The following a the scripts in the **MASTER**  branch working ready for use :
 
-- runssh.ps1 - Displays which SSH Hosts are available and ready to connect. 
+- runssh.ps1 - Displays which SSH Hosts are available and ready to connect. :heavy_check_mark:
 
 ## Installation
 
