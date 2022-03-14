@@ -23,6 +23,7 @@ The following are the scripts in the **MASTER**  branch working ready for use :
 The following a the scripts in the **MASTER**  branch working ready for use :
 
 - runssh.ps1 - Displays which SSH Hosts are available and ready to connect. :heavy_check_mark:
+- ActiveteScript.ps1 - places user-made scripts into user $PATH for global use. :-1:
 
 ## Installation
 
