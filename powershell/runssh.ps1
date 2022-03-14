@@ -1,3 +1,9 @@
+#Parameters
+param ($docker='N')
+#Adjust Parameters
+$docker = $docker.ToUpper()
+
+
 #Get Current user 
 $active_User = (Get-ChildItem Env:\USERNAME).Value
 
@@ -87,7 +93,13 @@ try {
         if ($ui -eq $ssh){
             Write-Host -ForegroundColor Green "You are connecting to: " $connections[$ui]["Host"]
             $ipath = $connections[$ui]["IdentityFile"]
-            docker run --rm -it --mount type=bind,source=$ipath,destination=/home/ssh/ sshtool ssh -i /home/ssh -p $connections[$ui]["Port"] $connections[$ui]["Hostname"] -l $connections[$ui]["User"]
+            If ($docker -eq 'Y'){
+                docker run --rm -it --mount type=bind,source=$ipath,destination=/home/ssh/ sshtool ssh -i /home/ssh -p $connections[$ui]["Port"] $connections[$ui]["Hostname"] -l $connections[$ui]["User"]
+            }
+            else{
+                ssh $connections[$ui]["Host"] #Write-Host $connections[$ui]["Host"]
+            }
+            
         }
     }
 }
