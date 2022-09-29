@@ -17,7 +17,7 @@ function greetingMsg {
     )
 
     Write-Ascii -InputObject $msg
-    Write-Host "This are the following paths: "
+    Write-Host "These are the following paths: "
     Write-Host
 }
 
@@ -73,8 +73,8 @@ $gotoData = Get-Content ($locationFolder+"\"+$folderName+"\"+$fileName) | Conver
 greetingMsg -msg 'Go-To'
 
 If ($gotoData.count -lt 1) {
-    Write-Host "`tNo Active paths to follow"
-    Write-Host "`tPlease go to " $locationFolder"\"$folderName"\"$fileName" and fill it up.`r"
+    Write-Host "  No Active paths to follow"
+    Write-Host "  Please go to " $locationFolder"\"$folderName"\"$fileName" and fill it up.`r"
     Write-Host
 }
 else {
