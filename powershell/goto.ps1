@@ -8,8 +8,14 @@ $fileName = "gotoConfig.json"
 $configFlag = 0 
 
 $gotoBlueprint = @{
-    "destination_Name1" = "/destination/path/1"
-    "destination_Name2" = "/destination/path/2"
+    "1" = @{
+        "name" = "aName"
+        "path" = "/destination/path/1"
+    }
+    "2" = @{
+        "name" = "aName"
+        "path" = "/destination/path/2"
+    }
 }
 
 # -------------------- 
@@ -22,7 +28,8 @@ function greetingMsg {
     )
 
     Write-Ascii -InputObject $msg
-    Write-Host "These are the following paths: "
+    Write-Host
+    Write-Host " These are the following paths: "
     Write-Host
 }
 
@@ -89,14 +96,21 @@ If ($gotoData.count -lt 1) {
                 Write-host -ForegroundColor "Yellow" "  After setting up gotoConfig re-run goto."
                 Write-host -ForegroundColor "Green" "  Script has exited."
                 Write-host
-                break
+                exit
             }
-        Default { Write-host -ForegroundColor "Green" "  Script has exited." }
+        Default { 
+                Write-host -ForegroundColor "Green" "  Script has exited." 
+                exit 
+            }
         
     }
 }
-else {
-    foreach ($k in $gotoData.keys){
-        Write-Host "`t"$k"`r"
-    }
+
+foreach ($k in $gotoData.keys){
+    Write-Host "  $k -> " $gotoData["$k"]["name"] "  " $gotoData["$k"]["path"]
 }
+Write-Host
+$usrRsp = Read-host -Prompt "  Select a path: "
+
+
+
