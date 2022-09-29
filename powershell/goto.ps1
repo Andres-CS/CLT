@@ -7,6 +7,11 @@ $folderName = ".gotoCommand"
 $fileName = "gotoConfig.json"
 $configFlag = 0 
 
+$gotoBlueprint = @{
+    "destination_Name1" = "/destination/path/1"
+    "destination_Name2" = "/destination/path/2"
+}
+
 # -------------------- 
 #   FUNCTIONS Def
 # -------------------- .
@@ -74,8 +79,21 @@ greetingMsg -msg 'Go-To'
 
 If ($gotoData.count -lt 1) {
     Write-Host "  No Active paths to follow"
-    Write-Host "  Please go to " $locationFolder"\"$folderName"\"$fileName" and fill it up.`r"
-    Write-Host
+    Write-Host "  Please go to " $locationFolder"\"$folderName"\"$fileName" and set up.`r"
+    $rspn = Read-Host -Prompt "  Do you want to open the gotoConfig.json file [y/n]?"
+    switch ($rspn) {
+        "y" { 
+                Write-Host -ForegroundColor "Yellow" "  Opening gotoConfig.json ... "
+                $gotoBlueprint | ConvertTo-Json |  Out-File -FilePath ($locationFolder+"\"+$folderName+"\"+$fileName)
+                start ($locationFolder+"\"+$folderName+"\"+$fileName)
+                Write-host -ForegroundColor "Yellow" "  After setting up gotoConfig re-run goto."
+                Write-host -ForegroundColor "Green" "  Script has exited."
+                Write-host
+                break
+            }
+        Default { Write-host -ForegroundColor "Green" "  Script has exited." }
+        
+    }
 }
 else {
     foreach ($k in $gotoData.keys){
