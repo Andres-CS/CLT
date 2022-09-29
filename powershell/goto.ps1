@@ -9,7 +9,18 @@ $configFlag = 0
 
 # -------------------- 
 #   FUNCTIONS Def
-# -------------------- 
+# -------------------- .
+
+function greetingMsg {
+    param(
+        $msg
+    )
+
+    Write-Ascii -InputObject $msg
+    Write-Host "This are the following paths: "
+    Write-Host
+}
+
 function Create-gotoInfo {
     param(
         $location,
@@ -17,15 +28,17 @@ function Create-gotoInfo {
         $fileName
         )
     
-    if ($type -match "d"){ New-Item -ItemType "Directory" -Path $location -Name $fileName }
-    
-    if ($type -match "f"){ New-Item -ItemType "file" -Path $location -Name $fileName }
+    switch($type){
+        "d" { 
+            New-Item -ItemType "Directory" -Path $location -Name $fileName
+            break
+         }
+         "f" {
+            New-Item -ItemType "file" -Path $location -Name $fileName
+            break
+         }
+    }
 }
-
-function readFile {
-
-}
-
 
 # -------------------- 
 #   START SCRIPT 
@@ -52,7 +65,20 @@ switch($configFlag){
     }
 }
 
-#Read config file
+#Read gotoConfig file
+$gotoData = Get-Content ($locationFolder+"\"+$folderName+"\"+$fileName) | ConvertFrom-Json -AsHashtable 
 
-$test = Get-Content ($locationFolder+"\"+$folderName+"\"+$fileName) | ConvertFrom-Json
-$test.njit.root
+
+#Greeting message
+greetingMsg -msg 'Go-To'
+
+If ($gotoData.count -lt 1) {
+    Write-Host "`tNo Active paths to follow"
+    Write-Host "`tPlease go to " $locationFolder"\"$folderName"\"$fileName" and fill it up.`r"
+    Write-Host
+}
+else {
+    foreach ($k in $gotoData.keys){
+        Write-Host "`t"$k"`r"
+    }
+}
