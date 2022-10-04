@@ -115,16 +115,25 @@ foreach ($k in $gotoData.keys){
 Write-host
 $usrRsp = Read-host -Prompt "  Select a path"
 
-#cd to user choice
-foreach($p in $gotoData.keys){
-    if ( $p -eq $usrRsp ){
-        Write-host -ForegroundColor "Yellow" "  Heading over ... "
-        cd $gotoData["$p"]["path"]
-        exit
+switch($usrRsp){
+    "h" {
+        Write-Host -ForegroundColor "Yellow" "  Help Menu - Working on it"
     }
+    Default{
+        #cd to user choice
+        foreach($p in $gotoData.keys){
+            if ( $p -eq $usrRsp ){
+                Write-host -ForegroundColor "Yellow" "  Heading over ... "
+                cd $gotoData["$p"]["path"]
+                exit
+            }
+        }
+
+        #Wrong choice
+        write-host -ForegroundColor "Red" "  Option '$usrRsp' not found."
+        Write-host -ForegroundColor "Green" "  Script has exited." 
+    }
+
 }
 
-#Wrong choice
-write-host -ForegroundColor "Red" "  Option '$usrRsp' not found."
-Write-host -ForegroundColor "Green" "  Script has exited." 
 
