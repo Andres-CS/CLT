@@ -125,6 +125,7 @@ switch($usrRsp){
     "h" {
         Write-Host -ForegroundColor "Yellow" "  Help Menu - Working on it"
         callhelp
+        Write-host -ForegroundColor "Green" "  Script has exited."
     }
     Default{
         #cd to user choice
