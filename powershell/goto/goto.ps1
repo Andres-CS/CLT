@@ -5,6 +5,7 @@
 $locationFolder = $env:HOMEPATH
 $folderName = ".gotoCommand"
 $fileName = "gotoConfig.json"
+$helpFile = "gotoHelp.txt"
 $configFlag = 0 
 
 $gotoBlueprint = @{
@@ -52,6 +53,10 @@ function Create-gotoInfo {
     }
 }
 
+function callhelp {
+    notepad ($locationFolder+"/"+$folderName+"/"+$helpFile)
+}
+
 # -------------------- 
 #   START SCRIPT 
 # -------------------- 
@@ -73,6 +78,7 @@ switch($configFlag){
     2 {
         Write-Host " ** FOLDER AND FILE CREATED ** "
         Create-gotoInfo -type "d" -location $locationFolder -fileName $folderName
+        Copy-Item -Path $helpFile -Destination ($locationFolder+"\"+$folderName)
         Create-gotoInfo -type "f" -location ($locationFolder+"\"+$folderName) -fileName $fileName
     }
 }
@@ -113,18 +119,29 @@ foreach ($k in $gotoData.keys){
 
 #User choice
 Write-host
-$usrRsp = Read-host -Prompt "  Select a path"
+$usrRsp = Read-host -Prompt "  Select a path [help 'H/h']"
 
-#cd to user choice
-foreach($p in $gotoData.keys){
-    if ( $p -eq $usrRsp ){
-        Write-host -ForegroundColor "Yellow" "  Heading over ... "
-        cd $gotoData["$p"]["path"]
-        exit
+switch($usrRsp){
+    "h" {
+        Write-Host -ForegroundColor "Yellow" "  Help Menu - Working on it"
+        callhelp
+        Write-host -ForegroundColor "Green" "  Script has exited."
     }
+    Default{
+        #cd to user choice
+        foreach($p in $gotoData.keys){
+            if ( $p -eq $usrRsp ){
+                Write-host -ForegroundColor "Yellow" "  Heading over ... "
+                cd $gotoData["$p"]["path"]
+                exit
+            }
+        }
+
+        #Wrong choice
+        write-host -ForegroundColor "Red" "  Option '$usrRsp' not found."
+        Write-host -ForegroundColor "Green" "  Script has exited." 
+    }
+
 }
 
-#Wrong choice
-write-host -ForegroundColor "Red" "  Option '$usrRsp' not found."
-Write-host -ForegroundColor "Green" "  Script has exited." 
 
