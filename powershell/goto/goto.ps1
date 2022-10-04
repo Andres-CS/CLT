@@ -5,6 +5,7 @@
 $locationFolder = $env:HOMEPATH
 $folderName = ".gotoCommand"
 $fileName = "gotoConfig.json"
+$helpFile = "gotoHelp.txt"
 $configFlag = 0 
 
 $gotoBlueprint = @{
@@ -53,7 +54,6 @@ function Create-gotoInfo {
 }
 
 function callhelp {
-    $helpFile = "gotoHelp.txt"
     notepad ($locationFolder+"/"+$folderName+"/"+$helpFile)
 }
 
@@ -78,6 +78,7 @@ switch($configFlag){
     2 {
         Write-Host " ** FOLDER AND FILE CREATED ** "
         Create-gotoInfo -type "d" -location $locationFolder -fileName $folderName
+        Copy-Item -Path $helpFile -Destination ($locationFolder+"\"+$folderName)
         Create-gotoInfo -type "f" -location ($locationFolder+"\"+$folderName) -fileName $fileName
     }
 }
@@ -118,7 +119,7 @@ foreach ($k in $gotoData.keys){
 
 #User choice
 Write-host
-$usrRsp = Read-host -Prompt "  Select a path"
+$usrRsp = Read-host -Prompt "  Select a path [help 'H/h']"
 
 switch($usrRsp){
     "h" {

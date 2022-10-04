@@ -1,0 +1,18 @@
+Welcome to GoTo 
+
+** Prupose
+
+- Goto was designed with the intention to move fast between
+  a set of selected directories/folders.
+
+** Use
+
+- Goto will run and display a set of pre-configured directories.
+  The user only needs to select the index number to be moved to
+  such directory.
+
+** Help
+
+- Getting help will show/open this file.
+
+- Get help: only type "H" or "h" in the menu provided by goto.
