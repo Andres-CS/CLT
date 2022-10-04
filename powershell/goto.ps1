@@ -52,6 +52,11 @@ function Create-gotoInfo {
     }
 }
 
+function callhelp {
+    $helpFile = "gotoHelp.txt"
+    notepad ($locationFolder+"/"+$folderName+"/"+$helpFile)
+}
+
 # -------------------- 
 #   START SCRIPT 
 # -------------------- 
@@ -118,6 +123,7 @@ $usrRsp = Read-host -Prompt "  Select a path"
 switch($usrRsp){
     "h" {
         Write-Host -ForegroundColor "Yellow" "  Help Menu - Working on it"
+        callhelp
     }
     Default{
         #cd to user choice
