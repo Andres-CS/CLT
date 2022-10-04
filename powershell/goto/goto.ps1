@@ -19,11 +19,6 @@ $gotoBlueprint = @{
     }
 }
 
-$newObjPath = @{
-    "name" = ""
-    "path" = ""
-}
-
 # -------------------- 
 #   FUNCTIONS Def
 # -------------------- .
@@ -66,15 +61,21 @@ function callhelp {
 
 function addingObjPath {
     param(
-        $newItem,
         $currentItem
     )
+    $newObjPath = @{
+        "name" = ""
+        "path" = ""
+    }
 
-    $newItem["name"] = Read-Host "  Name"
-    $newItem["path"] = Read-Host "  Path"
+    $newObjPath["name"] = Read-Host "  Name"
+    $newObjPath["path"] = Read-Host "  Path"
 
-    if ( ! ($currentItem.ContainsKey([string]$currentItem.count+1))){
-        Write-Host -ForegroundColor "RED" "  New Item"
+    $tmpKey = $currentItem.count + 1
+    if ( ! ($currentItem.ContainsKey("$tmpKey"))){
+
+        $currentItem.add("$tmpKey", $newObjPath)
+        write-host $currentItem.keys
     }
 
 }
@@ -146,7 +147,12 @@ $usrRsp = Read-host -Prompt "  Select a path [Command]"
 switch($usrRsp){
     "a" {
         Write-Host -ForegroundColor "Yellow" "  Add Object ... "
-        addingObjPath -newItem $newObjPath -currentItem $gotoData
+        addingObjPath -currentItem $gotoData
+        
+        # TMP Print newly added item
+        Write-Host $gotoData.count
+        Write-Host $gotoData[[string]$gotoData.count]["name"]
+
     }
     "h" {
         Write-Host -ForegroundColor "Yellow" "  Help Menu ... "
