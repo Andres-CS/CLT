@@ -31,6 +31,7 @@ function greetingMsg {
     Write-Ascii -InputObject $msg
     Write-Host
     Write-Host " These are the following paths: "
+    Write-Host -ForegroundColor "Magenta" " [Help H/h]"
     Write-Host
 }
 
@@ -119,7 +120,7 @@ foreach ($k in $gotoData.keys){
 
 #User choice
 Write-host
-$usrRsp = Read-host -Prompt "  Select a path [help 'H/h']"
+$usrRsp = Read-host -Prompt "  Select a path [Command]"
 
 switch($usrRsp){
     "h" {
