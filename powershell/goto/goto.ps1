@@ -75,7 +75,6 @@ function addingObjPath {
     if ( ! ($currentItem.ContainsKey("$tmpKey"))){
 
         $currentItem.add("$tmpKey", $newObjPath)
-        write-host $currentItem.keys
     }
 
 }
@@ -148,11 +147,10 @@ switch($usrRsp){
     "a" {
         Write-Host -ForegroundColor "Yellow" "  Add Object ... "
         addingObjPath -currentItem $gotoData
-        
-        # TMP Print newly added item
-        Write-Host $gotoData.count
-        Write-Host $gotoData[[string]$gotoData.count]["name"]
-
+        #Write updated HashTable back to config file.
+        $gotoData | ConvertTo-Json | set-content -Path ($locationFolder+"\"+$folderName+"\"+$fileName)
+        Write-Host -ForegroundColor "Yellow" "  Add Object ... "
+        Write-host -ForegroundColor "Green" "  Script has exited."
     }
     "h" {
         Write-Host -ForegroundColor "Yellow" "  Help Menu ... "
