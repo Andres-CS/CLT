@@ -19,6 +19,11 @@ $gotoBlueprint = @{
     }
 }
 
+$newObjPath = @{
+    "name" = ""
+    "path" = ""
+}
+
 # -------------------- 
 #   FUNCTIONS Def
 # -------------------- .
@@ -31,7 +36,8 @@ function greetingMsg {
     Write-Ascii -InputObject $msg
     Write-Host
     Write-Host " These are the following paths: "
-    Write-Host -ForegroundColor "Magenta" " [Help H/h]"
+    Write-Host -ForegroundColor "Magenta" " [Help H/h]" -NoNewline
+    Write-Host -ForegroundColor "Blue" " [Add A/a]" 
     Write-Host
 }
 
@@ -56,6 +62,21 @@ function Create-gotoInfo {
 
 function callhelp {
     notepad ($locationFolder+"/"+$folderName+"/"+$helpFile)
+}
+
+function addingObjPath {
+    param(
+        $newItem,
+        $currentItem
+    )
+
+    $newItem["name"] = Read-Host "  Name"
+    $newItem["path"] = Read-Host "  Path"
+
+    if ( ! ($currentItem.ContainsKey([string]$currentItem.count+1))){
+        Write-Host -ForegroundColor "RED" "  New Item"
+    }
+
 }
 
 # -------------------- 
@@ -123,8 +144,12 @@ Write-host
 $usrRsp = Read-host -Prompt "  Select a path [Command]"
 
 switch($usrRsp){
+    "a" {
+        Write-Host -ForegroundColor "Yellow" "  Add Object ... "
+        addingObjPath -newItem $newObjPath -currentItem $gotoData
+    }
     "h" {
-        Write-Host -ForegroundColor "Yellow" "  Help Menu - Working on it"
+        Write-Host -ForegroundColor "Yellow" "  Help Menu ... "
         callhelp
         Write-host -ForegroundColor "Green" "  Script has exited."
     }
