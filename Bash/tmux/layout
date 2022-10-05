@@ -1,6 +1,6 @@
 tmux new-session -s 'vultrA' -d 'ttt'
 tmux split-window -h
-tmux send 'ttt' ENTER
+tmux send 'wavemon' ENTER
 tmux split-window -v
 tmux send 'ttt' ENTER
 tmux -2 attach-session
