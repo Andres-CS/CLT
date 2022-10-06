@@ -1,6 +1,6 @@
 tmux new-session -d -s 'vultrA'
 tmux split-window -h
-tmux send-keys 'tstssh' ENTER
+tmux send 'wavemon' ENTER
 tmux split-window -v
 tmux send-keys 'tstssh' ENTER
 tmux -2 attach-session
