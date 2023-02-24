@@ -109,7 +109,7 @@ else
 
 fi
 
-read -p "Select a host:" answ
+read -p "Host Number:" answ
 err_msg ${hostArray[$answ]}
 
 # --- CONNECT SSH ---
