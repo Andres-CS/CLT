@@ -25,20 +25,22 @@ succ_msg(){
 
 create_host_array(){
     local -a tmp_array=()
-    while read -r line
-    do
-        tmp_array+=($(grep -w ^Host $line | cut -d " " -f2))
-    done < $1
+    tmp_array=$(grep -w "^Host" $1 | cut -d " " -f2)
     echo ${tmp_array[@]}
 }
 
 create_hostname_array(){
     local -a tmp_array=()
-    while read -r line
-    do
-        tmp_array+=($(grep -w Hostname $line | cut -d " " -f3))
-    done < $1
+    tmp_array=$(grep -w Hostname $1 | cut -d " " -f3)
     echo ${tmp_array[@]}
+}
+
+install_figma(){
+    os_release="/etc/os-release"
+    insystem=$(which figlet)
+    echo $insystem | grep -o "no figlet"
+    #sudo dnf install figlet
+
 }
 
 # --- START SCRIPT ---
@@ -50,6 +52,8 @@ active_user=$(echo $USER)
 
 #Predefine .SSH folder path
 target_path="/home/${active_user}/.ssh/config"
+
+#install_figma
 
 # --- ACQUIRE HOSTS --- 
 
