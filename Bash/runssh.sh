@@ -114,8 +114,8 @@ else
 fi
 
 read -p "Host Number:" answ
-err_msg ${hostArray[$answ]}
+succ_msg ${hostArray[$answ]}
 
 # --- CONNECT SSH ---
 
-#gnome-terminal --window-with-profile=profile1 -- ssh -vv $answ
+gnome-terminal -- bash -c "ssh ${hostArray[$answ]}; exec bash -i "
