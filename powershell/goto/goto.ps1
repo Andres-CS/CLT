@@ -31,7 +31,8 @@ function greetingMsg {
     Write-Ascii -InputObject $msg
     Write-Host
     Write-Host " These are the following paths: "
-    Write-Host -ForegroundColor "Magenta" " [Help H/h]"
+    Write-Host -ForegroundColor "Magenta" " [Help H/h]" -NoNewline
+    Write-Host -ForegroundColor "Blue" " [Add A/a]" 
     Write-Host
 }
 
@@ -56,6 +57,26 @@ function Create-gotoInfo {
 
 function callhelp {
     notepad ($locationFolder+"/"+$folderName+"/"+$helpFile)
+}
+
+function addingObjPath {
+    param(
+        $currentItem
+    )
+    $newObjPath = @{
+        "name" = ""
+        "path" = ""
+    }
+
+    $newObjPath["name"] = Read-Host "  Name"
+    $newObjPath["path"] = Read-Host "  Path"
+
+    $tmpKey = $currentItem.count + 1
+    if ( ! ($currentItem.ContainsKey("$tmpKey"))){
+
+        $currentItem.add("$tmpKey", $newObjPath)
+    }
+
 }
 
 # -------------------- 
@@ -123,8 +144,16 @@ Write-host
 $usrRsp = Read-host -Prompt "  Select a path [Command]"
 
 switch($usrRsp){
+    "a" {
+        Write-Host -ForegroundColor "Yellow" "  Add Object ... "
+        addingObjPath -currentItem $gotoData
+        #Write updated HashTable back to config file.
+        $gotoData | ConvertTo-Json | set-content -Path ($locationFolder+"\"+$folderName+"\"+$fileName)
+        Write-Host -ForegroundColor "Yellow" "  Add Object ... "
+        Write-host -ForegroundColor "Green" "  Script has exited."
+    }
     "h" {
-        Write-Host -ForegroundColor "Yellow" "  Help Menu - Working on it"
+        Write-Host -ForegroundColor "Yellow" "  Help Menu ... "
         callhelp
         Write-host -ForegroundColor "Green" "  Script has exited."
     }
