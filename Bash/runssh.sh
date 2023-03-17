@@ -8,7 +8,7 @@ NO_COLOR='\033[0m'
 
 # --- Functions ---
 
-wlcm_msg(){
+welcome_msg(){
     echo -e "${YELLOW}"
     figlet "RunnSSH"
     echo -e "${NO_COLOR}"
@@ -23,15 +23,16 @@ succ_msg(){
     echo -e "${SUCCESS_COLOR}$1${NO_COLOR}"
 } 
 
-create_host_array(){
+create_array(){
     local -a tmp_array=()
-    tmp_array=$(grep -w "^Host" $1 | cut -d " " -f2)
-    echo ${tmp_array[@]}
-}
+    if [[ "$2" == "Host" ]]
+    then 
+        tmp_array=$(grep -w "^Host" $1 | cut -d " " -f2)
+    elif [[ "$2" == "Hostname" ]]
+    then
+        tmp_array=$(grep -w Hostname $1 | cut -d " " -f3)
+    fi
 
-create_hostname_array(){
-    local -a tmp_array=()
-    tmp_array=$(grep -w Hostname $1 | cut -d " " -f3)
     echo ${tmp_array[@]}
 }
 
@@ -74,12 +75,12 @@ fi
 declare -a hostArray=()
 declare -a hostnameArray=()
 
-for n in $(create_host_array $target_path)
+for n in $(create_array $target_path "Host")
 do
     hostArray+=($n)
 done
 
-for m in $(create_hostname_array $target_path)
+for m in $(create_array $target_path "Hostname")
 do 
     hostnameArray+=($m)
 done
@@ -88,7 +89,7 @@ done
 
 # --- USER UI --- 
 
-wlcm_msg
+welcome_msg
 
 if [ ${#hostArray[@]} == ${#hostnameArray[@]} ]
 then
@@ -114,3 +115,5 @@ else
 fi
 
 read -p "Host Number:" answ
+
+echo ${hostArray[$answ]}
