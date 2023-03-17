@@ -114,4 +114,4 @@ fi
 
 read -p "Host Number:" answ
 
-echo ${hostArray[$answ]}
+gnome-terminal -- bash -c "echo ${hostArray[$answ]} && ssh -vv ${hostArray[$answ]} && exec bash"
