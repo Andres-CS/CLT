@@ -54,8 +54,6 @@ active_user=$(echo $USER)
 #Predefine .SSH folder path
 target_path="/home/${active_user}/.ssh/config"
 
-#install_figma
-
 # --- ACQUIRE HOSTS --- 
 
 #Test predefine SSH folder path
