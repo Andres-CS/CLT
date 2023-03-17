@@ -114,9 +114,17 @@ else
 fi
 
 read -p "Host Number:" answ
+<<<<<<< HEAD
 
 err_msg ${hostArray[$answ]}
 
 # --- CONNECT SSH ---
 
 #gnome-terminal -- bash -c "ssh -vv $answ; exec bash -i"
+=======
+succ_msg ${hostArray[$answ]}
+
+# --- CONNECT SSH ---
+
+gnome-terminal -- bash -c "ssh ${hostArray[$answ]}; exec bash -i "
+>>>>>>> f401c17b1228757192267b3640232677c00cccf3
