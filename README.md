@@ -14,21 +14,21 @@ Hope it helps you too!
 ## Bash 
 The following are the scripts in the **MASTER**  branch working ready for use :
 
-| Script        | Description | Status |
-| ------        | ----------- | ------ |
-|Clearcons      | Stops and removes unused Docker containers. | :heavy_check_mark:
-|instkvm.sh     | Installs KVM in your linux machine. | :-1:
-|startvm.sh     | Lists VMs available, and user selects which machine to start. |:-1:
-|Tmux           | Folder that connects scripts related to tmux emulator. | :-1:
-|skeleton-sfy5php8.sh | Runs symfony-cli to create a skeleton project w/ maker and doctrine bundles using php8. | :heavy_check_mark:
-|runssh.sh      | Lists the configured Hosts and displays selecive menue to run SSH. |:heavy_check_mark:
+| Script        | Description | Status | Keywords |
+| ------        | ----------- | ------ | -------- |
+|Clearcons      | Stops and removes unused Docker containers. | :heavy_check_mark: | Docker
+|instkvm.sh     | Installs KVM in your linux machine. | :-1: | KVM
+|startvm.sh     | Lists VMs available, and user selects which machine to start. |:-1: | KVM
+|Tmux           | Folder that connects scripts related to tmux emulator. | :-1: | Tmux
+|skeleton-sfy5php8.sh | Runs symfony-cli to create a skeleton project w/ maker and doctrine bundles using php8. | :heavy_check_mark: | Symfony  PHP8
+|runssh.sh      | Lists the configured Hosts and displays selecive menue to run SSH. |:heavy_check_mark: | SSH gnome-terminal
 
 ## Powershell 
 The following a the scripts in the **MASTER**  branch working ready for use :
 
-| Script        | Description | Status |
-| ------        | ----------- | ------ |
-| runssh.ps1    | Displays which SSH Hosts are available and ready to connect. | :heavy_check_mark:
+| Script        | Description | Status | Keywords |
+| ------        | ----------- | ------ | -------- |
+| runssh.ps1    | Displays which SSH Hosts are available and ready to connect. | :heavy_check_mark: | SSH PS-v7
 | ActiveteScript.ps1 | Places user-made scripts into user $PATH for global use. | :-1:
 | goto.ps1      | CDs user into selected path based on config file. |:heavy_check_mark:
 
