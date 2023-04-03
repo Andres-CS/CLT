@@ -19,7 +19,7 @@ The following are the scripts in the **MASTER**  branch working ready for use :
 |[Clearcons](https://github.com/Andres-CS/scripts/blob/master/Bash/clearcons) | Stops and removes unused Docker containers. | :heavy_check_mark: | Docker
 |[instkvm.sh](https://github.com/Andres-CS/scripts/blob/master/Bash/instkvm.sh) | Installs KVM in your linux machine. | :-1: | KVM
 |[startvm.sh](https://github.com/Andres-CS/scripts/blob/master/Bash/startvm.sh) | Lists VMs available, and user selects which machine to start. |:-1: | KVM
-|[Tmux](https://github.com/Andres-CS/scripts/blob/master/Bash/Tmux) | Folder that connects scripts related to tmux emulator. | :-1: | Tmux
+|[Tmux](https://github.com/Andres-CS/scripts/tree/master/Bash/Tmux) | Folder that connects scripts related to tmux emulator. | :-1: | Tmux
 |[skeleton-sfy5php8.sh](https://github.com/Andres-CS/scripts/blob/master/Bash/skeleton-sfy5php8.sh) | Runs symfony-cli to create a skeleton project w/ maker and doctrine bundles using php8. | :heavy_check_mark: | Symfony  PHP8
 |[runssh.sh](https://github.com/Andres-CS/scripts/blob/master/Bash/runssh.sh) | Lists the configured Hosts and displays selecive menue to run SSH. |:heavy_check_mark: | SSH gnome-terminal
 
@@ -29,8 +29,8 @@ The following a the scripts in the **MASTER**  branch working ready for use :
 | Script        | Description | Status | Keywords |
 | ------        | ----------- | ------ | -------- |
 | [runssh.ps1](https://github.com/Andres-CS/scripts/blob/master/powershell/runssh.ps1) | Displays which SSH Hosts are available and ready to connect. | :heavy_check_mark: | SSH PS-v7
-| [ActiveteScript.ps1](https://github.com/Andres-CS/scripts/blob/master/powershell/ActiveteScript.ps1) | Places user-made scripts into user $PATH for global use. | :-1:
-| [goto.ps1](https://github.com/Andres-CS/scripts/blob/master/powershell/goto) | CDs user into selected path based on config file. |:heavy_check_mark:
+| [ActivateScript.ps1](https://github.com/Andres-CS/scripts/blob/master/powershell/ActivateScript.ps1) | Places user-made scripts into user $PATH for global use. | :-1:
+| [goto.ps1](https://github.com/Andres-CS/scripts/tree/master/powershell/goto) | CDs user into selected path based on config file. |:heavy_check_mark:
 
 ## Installation
 
