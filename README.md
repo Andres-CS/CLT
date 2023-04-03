@@ -16,7 +16,7 @@ The following are the scripts in the **MASTER**  branch working ready for use :
 
 | Script        | Description | Status | Keywords |
 | ------        | ----------- | ------ | -------- |
-|Clearcons      | Stops and removes unused Docker containers. | :heavy_check_mark: | Docker
+|[Clearcons](https://github.com/Andres-CS/scripts/blob/master/Bash/clearcons)      | Stops and removes unused Docker containers. | :heavy_check_mark: | Docker
 |instkvm.sh     | Installs KVM in your linux machine. | :-1: | KVM
 |startvm.sh     | Lists VMs available, and user selects which machine to start. |:-1: | KVM
 |Tmux           | Folder that connects scripts related to tmux emulator. | :-1: | Tmux
