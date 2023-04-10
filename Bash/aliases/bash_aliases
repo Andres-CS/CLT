@@ -1,0 +1,8 @@
+
+# Developer Folder
+alias dev='cd /home/$USER/Development'
+alias openspot='code /home/$USER/Development/Spot/'
+alias showalias='cat ~/.bash_aliases'
+alias opendev='code ~/Development/'
+alias activatespot='source /home/$USER/Development/2_PyVenvs/spot-pp-stq/bin/activate'
+alias activatepp='gnome-terminal -- bash -c "docker start pp_ngitws && docker attach pp_ngitws"'
