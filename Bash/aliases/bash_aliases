@@ -1,9 +1,15 @@
 
-# Developer Folder
+#s Aliases
+alias update_aliases='if [ -f ~/Development/scripts/Bash/alias/bash_aliases ]; then cp ~/Development/scripts/Bash/alias/bash_aliases ~/.bash_aliases_ && rm ~/.bash_aliases && mv ~/.bash_aliases_ ~/.bash_aliases fi'
+
+#P Aliases
 alias dev='cd /home/$USER/Development'
-alias openspot='code /home/$USER/Development/Spot/'
 alias showalias='cat ~/.bash_aliases'
 alias opendev='code ~/Development/'
+alias start_gh_dev='opendev && gnome-terminal -- bash -c "docker start gh_api && docker attach gh_api" '
+
+#W Aliases
 alias activatespot='source /home/$USER/Development/2_PyVenvs/spot-pp-stq/bin/activate'
 alias activatepp='gnome-terminal -- bash -c "docker start pp_ngitws && docker attach pp_ngitws"'
 alias gocws='cd /home/$USER/Development/0_Workaton/curl_catalog/'
+alias openspot='code /home/$USER/Development/Spot/'
