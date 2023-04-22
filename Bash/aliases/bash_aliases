@@ -17,4 +17,5 @@ alias sqliteb='~/.Installs/DB_Browser_for_SQLite-v3.12.2-x86_64.AppImage &'
 #W Aliases
 alias activatespot='source /home/$USER/Development/2_PyVenvs/spot-pp-stq/bin/activate'
 alias activatepp='gnome-terminal -- bash -c "docker start pp_ngitws && docker attach pp_ngitws"'
+alias gocws='cd /home/$USER/Development/0_Workaton/curl_catalog/'
 alias openspot='code /home/$USER/Development/Spot/'
