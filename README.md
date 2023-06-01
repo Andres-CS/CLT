@@ -11,6 +11,8 @@ Hope it helps you too!
 
 :heavy_check_mark: - Working properly
 
+Transfered - The script is no longer being worked in this repo. It has been moved to its own repository. 
+
 ## Bash 
 The following are the scripts in the **MASTER**  branch working ready for use :
 
@@ -21,7 +23,7 @@ The following are the scripts in the **MASTER**  branch working ready for use :
 |[startvm.sh](https://github.com/Andres-CS/scripts/blob/master/Bash/startvm.sh) | Lists VMs available, and user selects which machine to start. |:-1: | KVM
 |[Tmux](https://github.com/Andres-CS/scripts/tree/master/Bash/Tmux) | Folder that connects scripts related to tmux emulator. | :-1: | Tmux
 |[skeleton-sfy5php8.sh](https://github.com/Andres-CS/scripts/blob/master/Bash/skeleton-sfy5php8.sh) | Runs symfony-cli to create a skeleton project w/ maker and doctrine bundles using php8. | :heavy_check_mark: | Symfony  PHP8
-|[runssh.sh](https://github.com/Andres-CS/scripts/blob/master/Bash/runssh.sh) | Lists the configured Hosts and displays selecive menue to run SSH. |:heavy_check_mark: | SSH gnome-terminal
+|[runssh.sh](https://github.com/Andres-CS/runssh) | Lists the configured Hosts and displays selecive menue to run SSH. | Transfered | SSH gnome-terminal
 
 ## Powershell 
 The following a the scripts in the **MASTER**  branch working ready for use :
