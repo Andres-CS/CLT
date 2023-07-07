@@ -36,7 +36,7 @@ create_array(){
     echo ${tmp_array[@]}
 }
 
-largestString(){
+largest_string(){
     local len=0
     for n in $@
     do
@@ -45,13 +45,6 @@ largestString(){
             len=${#n}
         fi
     done
-    echo $len
-}
-
-menufy(){
-    local -a tmp_array=()
-    local len=0
-    len=`largestString $@`
     echo $len
 }
 
@@ -103,37 +96,43 @@ do
     hostnameArray+=($m)
 done
 
-menufy ${hostArray[@]}
-
-
-
 # --- USER UI --- 
 
-# welcome_msg
+welcome_msg 
 
-# if [ ${#hostArray[@]} == ${#hostnameArray[@]} ]
-# then
-#     c=0
-#     for ((c=0; c<${#hostArray[@]}; c++))
-#     do 
-#         succ_msg "$c - ${hostArray[$c]} -> ${hostnameArray[$c]}"
-#     done
-# else
-#     count=0
-#     for i in ${hostArray[@]}
-#     do 
-#         succ_msg "$count - $i"
-#         count=$(($count + 1))
-#     done
-#     count=0
-#     for j in ${hostnameArray[@]}
-#     do 
-#         succ_msg "$count - $j"
-#         count=$(($count + 1))
-#     done
+if [ ${#hostArray[@]} == ${#hostnameArray[@]} ]
+then
+    # Menu Items
+    postFix="@"
+    maxlen=`largest_string ${hostArray[@]}`
 
-# fi
+    c=0
+    for ((c=0; c<${#hostArray[@]}; c++))
+    do 
+        # Create var 'ws' with x number of whitespaces
+        # Truncate up to largest word 'maxlen'
+        # Print enclosed with quotes for it to show the whitespaces
+        printf -v ws %20s
+        hostArray[$c]=${hostArray[$c]}$ws
+        hostArray[$c]=${hostArray[$c]:0:$maxlen}
+        succ_msg "$c - ${hostArray[$c]}  ${postFix}  ${hostnameArray[$c]}"
+    done
+else
+    count=0
+    for i in ${hostArray[@]}
+    do 
+        succ_msg "$count - $i"
+        count=$(($count + 1))
+    done
+    count=0
+    for j in ${hostnameArray[@]}
+    do 
+        succ_msg "$count - $j"
+        count=$(($count + 1))
+    done
 
-# read -p "Host Number: " answ
+fi
 
-# gnome-terminal -- bash -c "echo ${hostArray[$answ]} && ssh -vv ${hostArray[$answ]} && exec bash"
+read -p "Host Number: " answ
+
+gnome-terminal -- bash -c "echo ${hostArray[$answ]} && ssh -vv ${hostArray[$answ]} && exec bash"
