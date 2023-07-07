@@ -36,6 +36,25 @@ create_array(){
     echo ${tmp_array[@]}
 }
 
+largestString(){
+    local len=0
+    for n in $@
+    do
+        if [ $len -lt ${#n} ]
+        then
+            len=${#n}
+        fi
+    done
+    echo $len
+}
+
+menufy(){
+    local -a tmp_array=()
+    local len=0
+    len=`largestString $@`
+    echo $len
+}
+
 install_figma(){
     os_release="/etc/os-release"
     insystem=$(which figlet)
@@ -72,6 +91,7 @@ fi
 # --- STORE HOSTS IN ARRAY
 declare -a hostArray=()
 declare -a hostnameArray=()
+declare -a menued_hostArray=()
 
 for n in $(create_array $target_path "Host")
 do
@@ -83,35 +103,37 @@ do
     hostnameArray+=($m)
 done
 
+menufy ${hostArray[@]}
+
 
 
 # --- USER UI --- 
 
-welcome_msg
+# welcome_msg
 
-if [ ${#hostArray[@]} == ${#hostnameArray[@]} ]
-then
-    c=0
-    for ((c=0; c<${#hostArray[@]}; c++))
-    do 
-        succ_msg "$c - ${hostArray[$c]} -> ${hostnameArray[$c]}"
-    done
-else
-    count=0
-    for i in ${hostArray[@]}
-    do 
-        succ_msg "$count - $i"
-        count=$(($count + 1))
-    done
-    count=0
-    for j in ${hostnameArray[@]}
-    do 
-        succ_msg "$count - $j"
-        count=$(($count + 1))
-    done
+# if [ ${#hostArray[@]} == ${#hostnameArray[@]} ]
+# then
+#     c=0
+#     for ((c=0; c<${#hostArray[@]}; c++))
+#     do 
+#         succ_msg "$c - ${hostArray[$c]} -> ${hostnameArray[$c]}"
+#     done
+# else
+#     count=0
+#     for i in ${hostArray[@]}
+#     do 
+#         succ_msg "$count - $i"
+#         count=$(($count + 1))
+#     done
+#     count=0
+#     for j in ${hostnameArray[@]}
+#     do 
+#         succ_msg "$count - $j"
+#         count=$(($count + 1))
+#     done
 
-fi
+# fi
 
-read -p "Host Number:" answ
+# read -p "Host Number: " answ
 
-gnome-terminal -- bash -c "echo ${hostArray[$answ]} && ssh -vv ${hostArray[$answ]} && exec bash"
+# gnome-terminal -- bash -c "echo ${hostArray[$answ]} && ssh -vv ${hostArray[$answ]} && exec bash"
