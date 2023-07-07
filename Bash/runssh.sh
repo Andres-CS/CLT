@@ -135,4 +135,14 @@ fi
 
 read -p "Host Number: " answ
 
-gnome-terminal -- bash -c "echo ${hostArray[$answ]} && ssh -vv ${hostArray[$answ]} && exec bash"
+if [ -z "$answ" ]
+then
+    err_msg "No option selected. Exiting"
+else
+    if [ $answ -gt $c ]
+    then 
+        err_msg "Option seleted: ${answ}, not valid. Exiting"
+    else
+        gnome-terminal -- bash -c "echo ${hostArray[$answ]} && ssh -vv ${hostArray[$answ]} && exec bash"
+    fi
+fi
