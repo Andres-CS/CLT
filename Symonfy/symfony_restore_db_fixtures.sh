@@ -52,15 +52,15 @@ then
     echo -e "📦 Files moved into $targetFolder 📦\n"
     echo "💣 DATABASE Operations 💣"
     echo " - symfony console doctrine:database:drop --force"
-    # symfony console doctrine:database:drop --force
+    symfony console doctrine:database:drop --force
     echo " - symfony console doctrine:database:create"
-    # symfony console doctrine:database:create
+    symfony console doctrine:database:create
     echo " - symfony console d:m:diff --formatted"
-    # symfony console d:m:diff --formatted
+    symfony console d:m:diff --formatted
     echo " - symfony console doctrine:migrations:migrate --no-interaction"
-    # symfony console doctrine:migrations:migrate --no-interaction
+    symfony console doctrine:migrations:migrate --no-interaction
     echo " - symfony console doctrine:fixtures:load"
-    # symfony console doctrine:fixtures:load
+    symfony console doctrine:fixtures:load
 fi
 
 echo -e "✅ Done ✅\n"
