@@ -1,0 +1,8 @@
+#system Aliases
+alias update_aliases='if [ -f ~/Development/scripts/Bash/alias/bash_aliases ]; then cp ~/Development/scripts/Bash/alias/bash_aliases ~/.bash_aliases_ && rm ~/.bash_aliases && mv ~/.bash_aliases_ ~/.bash_aliases fi'
+alias showsshconfig='cat ~/.ssh/config'
+alias pcup='sudo dnf update -y'
+alias showalias='cat ~/.bash_aliases'
+alias alias_work='cat ~/.bash_aliases_work'
+alias alias_system='cat ~/.bash_aliases_system'
+alias alias_personal='cat ~/.bash_aliases_personal'

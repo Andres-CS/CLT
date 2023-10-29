@@ -1,0 +1,7 @@
+#Work Aliases
+alias activatespot='source /home/$USER/Development/2_PyVenvs/spot-pp-stq/bin/activate'
+alias activatepp='gnome-terminal -- bash -c "docker start pp_ngitws && docker attach pp_ngitws"'
+alias spotauto='gnome-terminal -- bash -c "docker start spot_auto && docker docker attach spot_auto"'
+alias gocws='cd /home/$USER/Development/0_Workaton/curl_catalog/'
+alias gosapi='cd /home/$USER/Development/Spot/1_SPOT_API/'
+alias openspot='code /home/$USER/Development/Spot/'
