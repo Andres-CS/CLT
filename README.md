@@ -24,7 +24,7 @@ The following are the scripts in the **MASTER**  branch working ready for use :
 |[Tmux](https://github.com/Andres-CS/scripts/tree/master/Bash/Tmux) | Folder that connects scripts related to tmux emulator. | :-1: | Tmux
 |[skeleton-sfy5php8.sh](https://github.com/Andres-CS/scripts/blob/master/Bash/skeleton-sfy5php8.sh) | Runs symfony-cli to create a skeleton project w/ maker and doctrine bundles using php8. | :heavy_check_mark: | Symfony  PHP8
 |[runssh.sh](https://github.com/Andres-CS/runssh) | Lists the configured Hosts and displays selecive menue to run SSH. | Transfered | SSH gnome-terminal
-|[alias.py](https://github.com/Andres-CS/scripts/tree/master/Bash/aliases/aliasesmgt) | Manages cosumt aliases created by the user. | :-1: | poetry python aliases linux
+|[alias.py](https://github.com/Andres-CS/scripts/tree/master/Bash/aliases/aliasesmgt) | Manages costume aliases created by the user. | :-1: | poetry python aliases linux
 
 ## Powershell 
 The following a the scripts in the **MASTER**  branch working ready for use :
