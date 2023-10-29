@@ -70,7 +70,7 @@ def aliases(action):
 	if(action == "update"):
 		notFoundFiles = list()
 		dffFiles=list()
-		notdffFiles=list()
+		sameFiles=list()
 		target_alises = getSourceFiles()
 		home_files = getTargetLocationFiles(os.environ.get('HOME'))
 		
@@ -78,11 +78,9 @@ def aliases(action):
 			if ta in home_files.keys():
 				#If files are not the same(aka there is a diff)
 				if not filecmp.cmp(target_alises[ta]["path"],home_files[ta],shallow=False):
-					print("Yes Diff")
 					dffFiles.append( (target_alises[ta]["path"], home_files[ta]) )
 				else:
-					print("No Diff")
-					notdffFiles.append( (target_alises[ta]["path"], home_files[ta]) )
+					sameFiles.append( (target_alises[ta]["path"], home_files[ta]) )
 				
 			else:
 				notFoundFiles.append(ta)
@@ -90,8 +88,8 @@ def aliases(action):
 		if dffFiles:
 			diffFoundMsg(dffFiles,diff=True)
 		
-		if notdffFiles:
-			diffFoundMsg(notdffFiles)
+		if sameFiles:
+			diffFoundMsg(sameFiles)
 		
 		if notFoundFiles:
 			notFoundFilesMsg(notFoundFiles)
