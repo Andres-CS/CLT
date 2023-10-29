@@ -1,0 +1,7 @@
+#Personal Aliases
+alias dev='cd /home/$USER/Development'
+alias opendev='code ~/Development/'
+alias start_gh_dev='opendev && gnome-terminal -- bash -c "docker start gh_api && docker attach gh_api" '
+alias accdb='sqlite3 /run/media/$USER/Yellowtail/0001_ANDY/Accounts/newACCS.db'
+alias activatecliapp="podman start gh_api && podman attach gh_api"
+alias sqliteb='~/.Installs/DB_Browser_for_SQLite-v3.12.2-x86_64.AppImage &'
