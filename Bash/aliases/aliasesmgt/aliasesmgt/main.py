@@ -42,15 +42,25 @@ def notFoundFilesMsg(files):
 		click.echo(m)
 	click.echo(click.style("***********************************************************",fg="red"))
 
-def diffFoundMsg(diffFiles):
+def diffFoundMsg(diffFiles,diff=False):
 	msg = list()
-	msg.append("* Diff Found between:")
+	fgColor = ""
+
+	match diff:
+		case True:
+			msg.append("-- Differences:")
+			fgColor = "yellow"
+		case False:
+			msg.append("-- No difference:")
+			fgColor = "green"
+
 
 	for f in diffFiles:
 		msg.append(f'{f[0]} vs {f[1]}')
 	
 	for m in msg:
-		click.echo(click.style(m,fg="yellow"))
+		click.echo(click.style(m,fg=fgColor))
+	print()
 	
 
 @click.command()
@@ -60,6 +70,7 @@ def aliases(action):
 	if(action == "update"):
 		notFoundFiles = list()
 		dffFiles=list()
+		notdffFiles=list()
 		target_alises = getSourceFiles()
 		home_files = getTargetLocationFiles(os.environ.get('HOME'))
 		
@@ -67,14 +78,20 @@ def aliases(action):
 			if ta in home_files.keys():
 				#If files are not the same(aka there is a diff)
 				if not filecmp.cmp(target_alises[ta]["path"],home_files[ta],shallow=False):
+					print("Yes Diff")
 					dffFiles.append( (target_alises[ta]["path"], home_files[ta]) )
 				else:
-					print("No diff")
+					print("No Diff")
+					notdffFiles.append( (target_alises[ta]["path"], home_files[ta]) )
 				
-				if dffFiles:
-					diffFoundMsg(dffFiles)
 			else:
 				notFoundFiles.append(ta)
+		
+		if dffFiles:
+			diffFoundMsg(dffFiles,diff=True)
+		
+		if notdffFiles:
+			diffFoundMsg(notdffFiles)
 		
 		if notFoundFiles:
 			notFoundFilesMsg(notFoundFiles)
