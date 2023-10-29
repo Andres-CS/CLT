@@ -67,51 +67,50 @@ def backupFile(dstFile):
 	click.echo(click.style(f'Backing up file{dstFile}',fg="blue"))
 	os.rename(dstFile, dstFile+".bak")
 
-def update(srcFile, dstFile):
+def updateFiles(srcFile, dstFile):
 	#1.Make a backup of current file in destination
 	backupFile(dstFile)
 	#2 Copy source file into destination file
 	click.echo(click.style(f'Updating file{dstFile}',fg="green"))
 	print()
 	shutil.copy(srcFile,dstFile)
+
+def updateAliases():
+	notFoundFiles = list()
+	dffFiles=list()
+	sameFiles=list()
+	target_alises = getSourceFiles()
+	home_files = getTargetLocationFiles(os.environ.get('HOME'))
 	
+	for ta in target_alises.keys():
+		if ta in home_files.keys():
+			#If files are not the same(aka there is a diff)
+			if not filecmp.cmp(target_alises[ta]["absPath"],home_files[ta],shallow=False):
+				dffFiles.append( (target_alises[ta]["absPath"], home_files[ta]) )
+			else:
+				sameFiles.append( (target_alises[ta]["absPath"], home_files[ta]) )
+			
+		else:
+			notFoundFiles.append(ta)
+	
+	if dffFiles:
+		diffFoundMsg(dffFiles,diff=True)
+		for files in dffFiles:
+			updateFiles(files[0], files[1])
+	
+	if sameFiles:
+		diffFoundMsg(sameFiles)
+	
+	if notFoundFiles:
+		notFoundFilesMsg(notFoundFiles)
 
 @click.command()
-@click.option('--action',default="update", help="Actions to be perform on alise files.")
-def aliases(action):
+@click.option('--action', help="Actions to be perform on alise files.")
+def main(action):
 
 	if(action == "update"):
-		notFoundFiles = list()
-		dffFiles=list()
-		sameFiles=list()
-		target_alises = getSourceFiles()
-		home_files = getTargetLocationFiles(os.environ.get('HOME'))
-		
-		for ta in target_alises.keys():
-			if ta in home_files.keys():
-				#If files are not the same(aka there is a diff)
-				if not filecmp.cmp(target_alises[ta]["absPath"],home_files[ta],shallow=False):
-					dffFiles.append( (target_alises[ta]["absPath"], home_files[ta]) )
-				else:
-					sameFiles.append( (target_alises[ta]["absPath"], home_files[ta]) )
-				
-			else:
-				notFoundFiles.append(ta)
-		
-		if dffFiles:
-			diffFoundMsg(dffFiles,diff=True)
-			for files in dffFiles:
-				update(files[0], files[1])
-		
-		if sameFiles:
-			diffFoundMsg(sameFiles)
-		
-		if notFoundFiles:
-			notFoundFilesMsg(notFoundFiles)
-
+		updateAliases()	
 
 	else:
-		print("In development")
-
-if __name__=='__main__':
-	aliases()
+		msg="You either passed an option not valid or no option at all."
+		click.echo(click.style(msg,fg="magenta"))
