@@ -1,7 +1,7 @@
 import click
 import os
 import filecmp
-import difflib
+import shutil
 
 def getSourceFiles():
 	trgFiles = dict()
@@ -14,7 +14,8 @@ def getSourceFiles():
 		if srcF not in trgFiles.keys():
 			trgFiles["."+srcF] = {
 				"realName": srcF,
-				"path": abs_path + "/" + srcF
+				"absPath": abs_path + "/" + srcF,
+				"path": abs_path
 			}
 
 	return trgFiles
@@ -61,6 +62,18 @@ def diffFoundMsg(diffFiles,diff=False):
 	for m in msg:
 		click.echo(click.style(m,fg=fgColor))
 	print()
+
+def backupFile(dstFile):
+	click.echo(click.style(f'Backing up file{dstFile}',fg="blue"))
+	os.rename(dstFile, dstFile+".bak")
+
+def update(srcFile, dstFile):
+	#1.Make a backup of current file in destination
+	backupFile(dstFile)
+	#2 Copy source file into destination file
+	click.echo(click.style(f'Updating file{dstFile}',fg="green"))
+	print()
+	shutil.copy(srcFile,dstFile)
 	
 
 @click.command()
@@ -77,23 +90,25 @@ def aliases(action):
 		for ta in target_alises.keys():
 			if ta in home_files.keys():
 				#If files are not the same(aka there is a diff)
-				if not filecmp.cmp(target_alises[ta]["path"],home_files[ta],shallow=False):
-					dffFiles.append( (target_alises[ta]["path"], home_files[ta]) )
+				if not filecmp.cmp(target_alises[ta]["absPath"],home_files[ta],shallow=False):
+					dffFiles.append( (target_alises[ta]["absPath"], home_files[ta]) )
 				else:
-					sameFiles.append( (target_alises[ta]["path"], home_files[ta]) )
+					sameFiles.append( (target_alises[ta]["absPath"], home_files[ta]) )
 				
 			else:
 				notFoundFiles.append(ta)
 		
 		if dffFiles:
 			diffFoundMsg(dffFiles,diff=True)
+			for files in dffFiles:
+				update(files[0], files[1])
 		
 		if sameFiles:
 			diffFoundMsg(sameFiles)
 		
 		if notFoundFiles:
 			notFoundFilesMsg(notFoundFiles)
-				
+
 
 	else:
 		print("In development")
