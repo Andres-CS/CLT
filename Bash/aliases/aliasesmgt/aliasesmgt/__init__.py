@@ -15,7 +15,7 @@ try:
     load_dotenv()
 except:
     print("ERROR - .env file could not be loaded.")
-    exit()
+    exit(code=0)
 
 
 # Set Logging
@@ -30,4 +30,4 @@ try:
     )
 except:
     print("ERROR - could not set logger")
-    exit()
+    exit(code=0)
