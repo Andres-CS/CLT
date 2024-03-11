@@ -2,8 +2,11 @@ import click
 import os
 import filecmp
 import shutil
+import logging as logger
+
 
 def getSourceFiles():
+	logger.debug("-- Main:getSourceFiles")
 	trgFiles = dict()
 	target_dir ="alises"
 	parent_dir = os.getcwd()
@@ -21,6 +24,7 @@ def getSourceFiles():
 	return trgFiles
 
 def getTargetLocationFiles(path):
+	logger.debug("-- Main:getTargetLocationFiles")
 	homeFiles = dict()
 	hFiles = os.listdir(path)
 
@@ -31,6 +35,7 @@ def getTargetLocationFiles(path):
 	return homeFiles
 
 def notFoundFilesMsg(files):
+	logger.debug("-- Main:notFoundFilesMsg")
 	msg = list()
 
 	msg.append("The following alias file[s] are not in the target location:")
@@ -44,6 +49,7 @@ def notFoundFilesMsg(files):
 	click.echo(click.style("***********************************************************",fg="red"))
 
 def diffFoundMsg(diffFiles,diff=False):
+	logger.debug("-- Main:diffFoundMsg")
 	msg = list()
 	fgColor = ""
 
@@ -64,6 +70,7 @@ def diffFoundMsg(diffFiles,diff=False):
 	print()
 
 def backupFile(dstFile):
+	logger.debug("-- Main:backupFile")
 	click.echo(click.style(f'Backing up file{dstFile}',fg="blue"))
 	os.rename(dstFile, dstFile+".bak")
 
@@ -76,6 +83,7 @@ def updateFiles(srcFile, dstFile):
 	shutil.copy(srcFile,dstFile)
 
 def updateAliases():
+	logger.debug("-- Main:updateAliases")
 	notFoundFiles = list()
 	dffFiles=list()
 	sameFiles=list()
@@ -107,6 +115,8 @@ def updateAliases():
 @click.command()
 @click.option('--action', help="Actions to be perform on alise files.")
 def main(action):
+
+	logger.debug("-- Main --")
 
 	if(action == "update"):
 		updateAliases()	
