@@ -26,8 +26,7 @@ try:
     logger.basicConfig(
         filename=filepath, 
         level=logger.DEBUG,
-        format=f'%(levelname)s::{myUUID}::%(message)s',
-        datefmt='%a, %d %b %Y %H:%M:%S'
+        format=f'%(levelname)s::%(asctime)s::{myUUID}::%(message)s',
     )
 except:
     print("ERROR - could not set logger")
