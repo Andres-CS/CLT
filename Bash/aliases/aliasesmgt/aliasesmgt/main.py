@@ -1,26 +1,32 @@
-import click
+import logging as logger
 import os
 import filecmp
 import shutil
+import click
 
-def getSourceFiles():
-	trgFiles = dict()
+
+def get_source_files():
+	'''Get file from source'''
+	logger.debug("-- Main:getSourceFiles")
+	trg_files = dict()
 	target_dir ="alises"
 	parent_dir = os.getcwd()
 	abs_path = parent_dir+"/"+target_dir
-	srcFiles = os.listdir(abs_path)
-	
-	for srcF in srcFiles:
-		if srcF not in trgFiles.keys():
-			trgFiles["."+srcF] = {
+	src_files = os.listdir(abs_path)
+
+	for srcF in src_files:
+		if srcF not in trg_files:
+			trg_files["."+srcF] = {
 				"realName": srcF,
 				"absPath": abs_path + "/" + srcF,
 				"path": abs_path
 			}
+	return trg_files
 
-	return trgFiles
 
-def getTargetLocationFiles(path):
+def get_target_location_files(path):
+	'''Get Target Location Files'''
+	logger.debug("-- Main:get_target_location_files")
 	homeFiles = dict()
 	hFiles = os.listdir(path)
 
@@ -30,7 +36,8 @@ def getTargetLocationFiles(path):
 	
 	return homeFiles
 
-def notFoundFilesMsg(files):
+def not_found_files_msg(files):
+	logger.debug("-- Main:not_found_files_msg")
 	msg = list()
 
 	msg.append("The following alias file[s] are not in the target location:")
@@ -44,6 +51,7 @@ def notFoundFilesMsg(files):
 	click.echo(click.style("***********************************************************",fg="red"))
 
 def diffFoundMsg(diffFiles,diff=False):
+	logger.debug("-- Main:diffFoundMsg")
 	msg = list()
 	fgColor = ""
 
@@ -64,6 +72,7 @@ def diffFoundMsg(diffFiles,diff=False):
 	print()
 
 def backupFile(dstFile):
+	logger.debug("-- Main:backupFile")
 	click.echo(click.style(f'Backing up file{dstFile}',fg="blue"))
 	os.rename(dstFile, dstFile+".bak")
 
@@ -76,11 +85,12 @@ def updateFiles(srcFile, dstFile):
 	shutil.copy(srcFile,dstFile)
 
 def updateAliases():
+	logger.debug("-- Main:updateAliases")
 	notFoundFiles = list()
 	dffFiles=list()
 	sameFiles=list()
-	target_alises = getSourceFiles()
-	home_files = getTargetLocationFiles(os.environ.get('HOME'))
+	target_alises = get_source_files()
+	home_files = get_target_location_files(os.environ.get('HOME'))
 	
 	for ta in target_alises.keys():
 		if ta in home_files.keys():
@@ -102,11 +112,13 @@ def updateAliases():
 		diffFoundMsg(sameFiles)
 	
 	if notFoundFiles:
-		notFoundFilesMsg(notFoundFiles)
+		not_found_files_msg(notFoundFiles)
 
 @click.command()
 @click.option('--action', help="Actions to be perform on alise files.")
 def main(action):
+
+	logger.debug("-- Main --")
 
 	if(action == "update"):
 		updateAliases()	

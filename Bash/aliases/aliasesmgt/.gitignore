@@ -1,1 +1,8 @@
 *.pyc
+
+# Peotry Stuff
+*.lock
+
+
+# Logging
+/var/log
